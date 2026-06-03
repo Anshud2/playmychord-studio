@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PlayMyChord Studio - Gere músicas com IA">
+  <meta name="theme-color" content="#ff6b35">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/png" href="/icon-192.png">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <title>PlayMyChord Studio</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app">
+    <div class="sidebar">
+      <div class="logo">🎵 PlayMyChord</div>
+      <nav class="nav">
+        <button class="nav-item active" data-tab="generate">⚡ Gerar</button>
+        <button class="nav-item" data-tab="custom">🎛️ Custom</button>
+        <button class="nav-item" data-tab="lyrics">📝 Letras</button>
+        <button class="nav-item" data-tab="library">🎵 Biblioteca</button>
+        <button class="nav-item" data-tab="settings">⚙️ Config</button>
+      </nav>
+    </div>
+
+    <div class="main">
+      <div id="tab-generate" class="tab-content active">
+        <h1>Gerar Música</h1>
+        <input type="text" id="prompt-input" placeholder="Descreva a música que quer..." class="input">
+        <label class="checkbox">
+          <input type="checkbox" id="instrumental-check">
+          Instrumental
+        </label>
+        <button id="generate-btn" class="btn">Gerar Música</button>
+        <div id="generate-result" class="result"></div>
+      </div>
+
+      <div id="tab-custom" class="tab-content">
+        <h1>Gerar Música Custom</h1>
+        <input type="text" id="custom-title" placeholder="Título..." class="input">
+        <input type="text" id="custom-tags" placeholder="Tags (ex: pop, rock)..." class="input">
+        <textarea id="custom-lyrics" placeholder="Letras ou descrição..." class="input"></textarea>
+        <button id="custom-generate-btn" class="btn">Gerar</button>
+        <div id="custom-result" class="result"></div>
+      </div>
+
+      <div id="tab-lyrics" class="tab-content">
+        <h1>Gerar Letras</h1>
+        <input type="text" id="lyrics-prompt" placeholder="Descreva as letras..." class="input">
+        <button id="lyrics-btn" class="btn">Gerar Letras</button>
+        <div id="lyrics-result" class="result"></div>
+      </div>
+
+      <div id="tab-library" class="tab-content">
+        <h1>Biblioteca</h1>
+        <input type="text" id="music-ids" placeholder="IDs das músicas (separados por vírgula)..." class="input">
+        <button id="library-btn" class="btn">Buscar</button>
+        <div id="library-result" class="result"></div>
+      </div>
+
+      <div id="tab-settings" class="tab-content">
+        <h1>Configurações</h1>
+        <label>Cookie do Suno:</label>
+        <textarea id="cookie-input" placeholder="Cole seu cookie aqui..." class="input"></textarea>
+        <button id="save-cookie-btn" class="btn">Salvar Cookie</button>
+        <button id="test-cookie-btn" class="btn secondary">Testar Cookie</button>
+        <div id="settings-result" class="result"></div>
+        <hr>
+        <button id="get-limit-btn" class="btn">Ver Créditos</button>
+        <div id="limit-result" class="result"></div>
+      </div>
+    </div>
+
+    <div class="player-bar">
+      <div id="player-info">Nenhuma música em reprodução</div>
+      <audio id="player" controls></audio>
+    </div>
+
+    <nav class="mobile-nav">
+      <button class="mobile-nav-item active" data-tab="generate">⚡</button>
+      <button class="mobile-nav-item" data-tab="custom">🎛️</button>
+      <button class="mobile-nav-item" data-tab="lyrics">📝</button>
+      <button class="mobile-nav-item" data-tab="library">🎵</button>
+      <button class="mobile-nav-item" data-tab="settings">⚙️</button>
+    </nav>
+  </div>
+
+  <script src="/app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(function(registration) {
+            console.log('[PWA] Service Worker registrado:', registration.scope);
+          })
+          .catch(function(error) {
+            console.log('[PWA] Falha ao registrar:', error);
+          });
+      });
+    }
+  </script>
+</body>
+</html>

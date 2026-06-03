@@ -1,0 +1,10 @@
+{
+  "name": "PlayMyChord Studio",
+  "short_name": "PlayMyChord",
+  "description": "Gere musicas com IA usando a API do Suno",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#ff6b35",
+  "orientation": "portrait",
+  "scope": "/",

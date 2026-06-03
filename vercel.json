@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "buildCommand": "mkdir -p .vercel/output/static && cp -r build/* .vercel/output/static/",
+  "outputDirectory": ".vercel/output/static",
+  "framework": "static",
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "nodejs18.x"
+    }
+  }
+}
